@@ -1,0 +1,24 @@
+---
+title: "ws-gis-02-1"
+author: "Kleebaue"
+date: "14 November 2017"
+output: html_document
+---
+#1
+structural <- c("Baumkronendichte","Baumhoehe",  "Unterwuchs", "Topographie")
+response <- c("density first returns", "höchster return", "returns oberhalb des Bodens", "tiefster return")
+scale <- c("m", "m","m","m")
+
+Tabelle <- data.frame(structural, response, scale)
+names <- c("Structural attributes", "Response", "Spatial scale")
+colnames(Tabelle) <- names
+
+#2
+# 1. oberster und tiefster return-> aplitude des Waldes/ Topographie -> Spitze
+# 2. Return Cluster weisen auf dichte Kronen/ dichten Unterwuchs hin. Abwesenheit von Returns -> Abwesenheit von Bewuchs.
+
+# Schwierigkeiten für einen Algorithmus:
+# - Returns dringen nicht immer bis zum Boden
+# - vertikale Schichtung manchmal schwer abzuleiten
+# - findet nicht immer den höchsten Punkt eines Baumes
+# - es dringen eventuell nicht ausreichen punkte in den Unterwuchs um diesen angemessen zu beschreiben
