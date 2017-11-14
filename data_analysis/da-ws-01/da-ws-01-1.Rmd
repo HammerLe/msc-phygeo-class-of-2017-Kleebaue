@@ -1,0 +1,25 @@
+---
+title: "da-ws-01-1"
+author: "Kleebaue"
+date: "14 November 2017"
+output: html_document
+---
+
+a=2
+b=5
+r1 <- a+b 
+r2 <- a-b
+r3 <- a*b
+r4<- a/b
+v1 <- c(r1, r2, r3, r4)
+r5 <- a**b
+v1 <- c (v1, r5)
+print(v1)
+v2 <- c("sum", "difference", "product", "ratio", "to the power of")
+print(v2)
+df <- data.frame(v1,v2)
+print(df)
+colnames(df)<-c("Results", "Operation")
+print(df)
+df[3,1]
+
