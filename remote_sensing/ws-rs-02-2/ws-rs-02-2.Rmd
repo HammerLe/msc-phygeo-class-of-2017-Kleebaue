@@ -1,0 +1,41 @@
+---
+title: "ws-ra-02-2"
+author: "Kleebaue"
+date: "16 November 2017"
+output: html_document
+---
+setwd("F:/Uni/Geo/_MA/Remote Sensing/H2")
+install.packages("mapview")
+library("raster")
+library("rgdal")
+library("tiff")
+library("mapview")
+
+#Beispiel1
+
+East1 <- raster("478000_5630000.tif")
+East2 <- raster("478000_5632000.tif")
+L<-raster("lidar.tif")
+
+Beispiel2 <-  list.files("F:/Uni/Geo/_MA/Remote Sensing/H2",full.names=TRUE, pattern="tif")
+
+data=list()
+for(i in seq(length(Beispiel2))){data[[i]]=raster(Beispiel2[i])}
+
+data=lapply(Beispiel2, function(x){raster(x)})
+data [[1]]
+
+data1=lapply(Beispiel2, function(x){stack(x)})
+data1[[1]]
+
+#projection(L) <- CRS("+init=epsg:25832")
+projection(East1) <-CRS("+init=epsg:25832")
+projection(East2)<-CRS("+init=epsg:25832")
+
+#Crop raster
+Crop_East1 <- crop(East1,L,"F:/Uni/Geo/_MA/Remote Sensing/H2/areal_cropped/east1_crop",format= "GTiff", overwrite= T, snap="near")
+Crop_East2 <- crop(East2,L,"F:/Uni/Geo/_MA/Remote Sensing/H2/areal_cropped/east2_crop",format= "GTiff", overwrite=T, snap="near")
+
+#neu speichern
+writeRaster(East1,"F:/Uni/Geo/_MA/Remote Sensing/H2/areal_cropped/478000_5630000_deprc",format="GTiff", overwrite=T)
+writeRaster(East1,"F:/Uni/Geo/_MA/Remote Sensing/H2/areal_cropped/478000_5632000_deprc",format="GTiff", overwrite=T)
